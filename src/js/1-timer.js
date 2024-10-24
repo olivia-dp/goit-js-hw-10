@@ -10,7 +10,8 @@ import flatpickr from "flatpickr";
 import "flatpickr/dist/flatpickr.min.css";
 import iziToast from "izitoast";
 import "izitoast/dist/css/iziToast.min.css";
-
+startBtn.disabled = true;
+startBtn.className = "start-btn";
 let userSelectedDate = null;
 const fp = flatpickr("#datetime-picker", {
     enableTime: true,
@@ -33,6 +34,7 @@ const fp = flatpickr("#datetime-picker", {
         startBtn.disabled = true;
     } else {
         startBtn.disabled = false;
+        startBtn.className = "is-active";
     }
   },}); // flatpickr
 
@@ -57,6 +59,9 @@ function start() {
 if( timeDifference > 0) {
         const time = getTimeComponents(timeDifference);
         onTick(time);
+        startBtn.disabled = true;
+        startBtn.className = "start-btn";
+  
                 
 }
   }, 1000)
