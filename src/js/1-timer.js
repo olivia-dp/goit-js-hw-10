@@ -1,5 +1,5 @@
 const startBtn = document.querySelector("button[data-start]");
-
+const dateInput = document.querySelector(".input-data")
 const clockDays = document.querySelector("span[data-days]");
 const clockHours = document.querySelector("span[data-hours]");
 const clockMinutes = document.querySelector("span[data-minutes]");
@@ -56,13 +56,17 @@ function start() {
         let timeDifference = userSelectedDate - now;
         intervalId = setInterval(() => {
         timeDifference -= 1000;
+        
 if( timeDifference > 0) {
         const time = getTimeComponents(timeDifference);
         onTick(time);
         startBtn.disabled = true;
         startBtn.className = "start-btn";
-  
+        dateInput.disabled = true;
                 
+}
+else {
+  stop();
 }
   }, 1000)
 }
@@ -97,4 +101,13 @@ function onTick({ days, hours, minutes, seconds }) {
     clockMinutes.textContent = `${minutes}`;
     clockSeconds.textContent = `${seconds}`;
 
+}
+
+function stop() {
+  clearInterval(intervalId);
+  startBtn.disabled = false;
+  startBtn.className = "is-active";
+  const time = getTimeComponents(0);
+  onTick(time);
+  dateInput.disabled = false;
 }
